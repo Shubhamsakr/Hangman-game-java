@@ -1,0 +1,66 @@
+import java.util.Scanner;
+public class TestDemo 
+{
+public static void main(String[] args) 
+{
+		Scanner input=new Scanner(System.in);
+		String word="TRUMP";
+		char[] key={'T','R','U','M','P'};
+		char ch='-';
+		String keyChar;
+		int len;
+		int pos;
+		int st=0;
+		len=word.length();
+		int count=0;
+		for(int i=0;i<key.length;i++)
+			key[i]='-';
+		
+		do
+		{
+			System.out.print("Enter your guess:");
+			keyChar=input.next();
+			ch=keyChar.charAt(0);
+			do
+			{
+				boolean res=check(word, ch, st, len);
+				if(res==true)
+					count++;
+				pos=getPosition(word, ch, st, len);
+				if(pos==-1)
+					break;
+				key[pos]=ch;
+				st=pos+1;
+			}while(st<len);
+			st=0;
+			pos=0;
+			display(key, len);
+			
+		}while(count!=len);
+System.out.println("Correct word guessed..! Congratulations :)");
+	}
+public static boolean check(String word,char ch,
+    int st,int len)
+	{
+		for(int i=st;i<len;i++)
+		{
+			if(word.charAt(i)==ch)
+				return true;
+		}
+		return false;
+	}
+	public static int getPosition(String word,char ch,int st,int len)
+	{
+		for(int i=st;i<len;i++)
+	 		if(word.charAt(i)==ch)
+			{
+				return i;
+			}
+		return -1;
+	}
+	public static void display(char[] key,int len)
+	{
+		System.out.print(key);
+		System.out.println();
+	}
+}
